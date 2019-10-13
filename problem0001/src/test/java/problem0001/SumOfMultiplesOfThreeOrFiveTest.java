@@ -2,31 +2,35 @@ package problem0001;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class SumOfMultiplesOfThreeOrFiveTest {
 
-  @Test
-  public void testUpToOne() {
-    assertEquals(0, SumOfMultiplesOfThreeOrFive.compute(1));
+  @Parameterized.Parameters(name = "{index}: f({0})={1}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][] {
+            { 3, 0 },
+            { 4, 3 },
+            { 6, 8 },
+            { 10, 23 }
+    });
+  }
+
+  private int input;
+  private int expected;
+
+  public SumOfMultiplesOfThreeOrFiveTest(int input, int expected) {
+    this.input = input;
+    this.expected = expected;
   }
 
   @Test
-  public void testUpToThree() {
-    assertEquals(0, SumOfMultiplesOfThreeOrFive.compute(3));
-  }
-
-  @Test
-  public void testUpToFour() {
-    assertEquals(3, SumOfMultiplesOfThreeOrFive.compute(4));
-  }
-
-  @Test
-  public void testUpToSix() {
-    assertEquals(8, SumOfMultiplesOfThreeOrFive.compute(6));
-  }
-
-  @Test
-  public void testUpToTen() {
-    assertEquals(23, SumOfMultiplesOfThreeOrFive.compute(10));
+  public void testCompute() {
+    assertEquals(expected, SumOfMultiplesOfThreeOrFive.compute(input));
   }
 }
