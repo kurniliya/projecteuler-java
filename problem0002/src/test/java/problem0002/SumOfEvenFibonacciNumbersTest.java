@@ -1,4 +1,4 @@
-package problem0001;
+package problem0002;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,28 +9,28 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class SumOfMultiplesOfThreeOrFiveTest {
+public class SumOfEvenFibonacciNumbersTest {
 
-  private int input;
+  private SumOfEvenFibonacciNumbers calculator = new SumOfEvenFibonacciNumbers();
   private int expected;
+  private int input;
 
-  public SumOfMultiplesOfThreeOrFiveTest(int input, int expected) {
-    this.input = input;
+  public SumOfEvenFibonacciNumbersTest(int input, int expected) {
     this.expected = expected;
+    this.input = input;
   }
 
   @Parameterized.Parameters(name = "{index}: f({0})={1}")
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{
-        {3, 0},
-        {4, 3},
-        {6, 8},
-        {10, 23}
+        {1, 0},
+        {2, 2},
+        {100, 44},
     });
   }
 
   @Test
   public void testCompute() {
-    assertEquals(expected, SumOfMultiplesOfThreeOrFive.compute(input));
+    assertEquals(expected, calculator.compute(input));
   }
 }
