@@ -1,0 +1,4 @@
+rootProject.name = 'projecteuler-java'
+include 'problem0001'
+include 'problem0002'
+include 'problem0003'
