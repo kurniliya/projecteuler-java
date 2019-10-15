@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+dependencies {
+    compile project(':utils')
+
+    testImplementation 'junit:junit:4.12'
+}
+
+application {
+    mainClassName = 'problem0007.App'
+}

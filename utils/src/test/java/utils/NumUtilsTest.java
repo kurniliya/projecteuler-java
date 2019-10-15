@@ -17,8 +17,8 @@ public class NumUtilsTest {
   @RunWith(Parameterized.class)
   public static class DigitsTest {
 
-    private List<Integer> expected;
     private int arg1;
+    private List<Integer> expected;
 
     public DigitsTest(final int arg1, final List<Integer> expected) {
       this.arg1 = arg1;
@@ -42,8 +42,8 @@ public class NumUtilsTest {
   @RunWith(Parameterized.class)
   public static class IsPalindromeTest {
 
-    private boolean expected;
     private int arg1;
+    private boolean expected;
 
     public IsPalindromeTest(final int arg1, final boolean expected) {
       this.arg1 = arg1;
@@ -63,6 +63,34 @@ public class NumUtilsTest {
     @Test
     public void test() {
       assertEquals(expected, NumUtils.isPalindrome(arg1));
+    }
+  }
+
+  @RunWith(Parameterized.class)
+  public static class IsPrimeTest {
+
+    private int arg1;
+    private boolean expected;
+
+    public IsPrimeTest(final int arg1, final boolean expected) {
+      this.arg1 = arg1;
+      this.expected = expected;
+    }
+
+    @Parameterized.Parameters(name = "{index}: f({0})={1}")
+    public static Collection<Object[]> data() {
+      return Arrays.asList(new Object[][]{
+          {1, false},
+          {2, true},
+          {3, true},
+          {4, false},
+          {5, true},
+      });
+    }
+
+    @Test
+    public void test() {
+      assertEquals(expected, NumUtils.isPrime(arg1));
     }
   }
 }

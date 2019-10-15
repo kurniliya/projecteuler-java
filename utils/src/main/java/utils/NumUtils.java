@@ -28,6 +28,20 @@ public class NumUtils {
     return isPalindrome(digits(number));
   }
 
+  public static boolean isPrime(final long number) {
+    if (number <= 1) {
+      return false;
+    }
+
+    for (int i = 2; i * i <= number; i++) {
+      if (number % i == 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   private static boolean isPalindrome(final ArrayList<Integer> digits) {
     for (int i = 0; i < digits.size() / 2; i++) {
       if (!digits.get(i).equals(digits.get(digits.size() - i - 1))) {
