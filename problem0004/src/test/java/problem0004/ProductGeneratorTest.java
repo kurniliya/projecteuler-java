@@ -17,7 +17,8 @@ public class ProductGeneratorTest {
   private int minFactor;
   private int maxFactor;
 
-  public ProductGeneratorTest(final int minFactor, final int maxFactor, final List<Integer> expected) {
+  public ProductGeneratorTest(final int minFactor, final int maxFactor,
+      final List<Integer> expected) {
     this.minFactor = minFactor;
     this.maxFactor = maxFactor;
     this.expected = expected;

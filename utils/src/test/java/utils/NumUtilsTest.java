@@ -38,30 +38,31 @@ public class NumUtilsTest {
       assertEquals(expected, NumUtils.digits(arg1));
     }
   }
-    @RunWith(Parameterized.class)
-    public static class IsPalindromeTest {
 
-        private boolean expected;
-        private int arg1;
+  @RunWith(Parameterized.class)
+  public static class IsPalindromeTest {
 
-        public IsPalindromeTest(final int arg1, final boolean expected) {
-            this.arg1 = arg1;
-            this.expected = expected;
-        }
+    private boolean expected;
+    private int arg1;
 
-        @Parameterized.Parameters(name = "{index}: f({0})={1}")
-        public static Collection<Object[]> data() {
-            return Arrays.asList(new Object[][]{
-                {1, true},
-                {23, false},
-                {323, true},
-                {9009, true},
-            });
-        }
-
-        @Test
-        public void test() {
-            assertEquals(expected, NumUtils.isPalindrome(arg1));
-        }
+    public IsPalindromeTest(final int arg1, final boolean expected) {
+      this.arg1 = arg1;
+      this.expected = expected;
     }
+
+    @Parameterized.Parameters(name = "{index}: f({0})={1}")
+    public static Collection<Object[]> data() {
+      return Arrays.asList(new Object[][]{
+          {1, true},
+          {23, false},
+          {323, true},
+          {9009, true},
+      });
+    }
+
+    @Test
+    public void test() {
+      assertEquals(expected, NumUtils.isPalindrome(arg1));
+    }
+  }
 }
