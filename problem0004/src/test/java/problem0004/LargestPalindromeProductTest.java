@@ -16,7 +16,8 @@ public class LargestPalindromeProductTest {
   private int arg1;
   private int arg2;
 
-  public LargestPalindromeProductTest(final int arg1, final int arg2, final int expected) {
+  public LargestPalindromeProductTest(final int arg1, final int arg2,
+      final int expected) {
     this.arg1 = arg1;
     this.arg2 = arg2;
     this.expected = expected;
