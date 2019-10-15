@@ -8,5 +8,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'problem0001.App'
+    mainClassName = 'problem0008.App'
 }
