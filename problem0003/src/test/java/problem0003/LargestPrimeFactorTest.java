@@ -24,6 +24,7 @@ public class LargestPrimeFactorTest {
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{
         {2, 2},
+        {3, 3},
     });
   }
 
