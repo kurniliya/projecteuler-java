@@ -1,7 +1,11 @@
 package problem0012;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.List;
+import java.util.OptionalLong;
 import java.util.function.LongSupplier;
+import java.util.stream.LongStream;
 import utils.Factorization;
 import utils.PrimeFactor;
 
@@ -40,13 +44,20 @@ import utils.PrimeFactor;
 public class HighlyDivisibleTriangularNumber {
 
   public static long compute(final int minNumberOfDivisors) {
-    TriangularNumbersSupplier supplier = new TriangularNumbersSupplier(1);
-    while (true) {
-      final long number = supplier.getAsLong();
-      if (countDivisors(number) >= minNumberOfDivisors) {
-        return number;
-      }
+    checkArgument(minNumberOfDivisors >= 1);
+
+    if (minNumberOfDivisors == 1) {
+      // Unit 1 is special: it has no prime factorization.
+      return 1;
     }
+
+    OptionalLong result = LongStream
+        .generate(new TriangularNumbersSupplier())
+        .skip(1)  // Unit 1 is special: it has no prime factorization.
+        .filter(value -> countDivisors(value) >= minNumberOfDivisors)
+        .findFirst();
+
+    return result.isPresent() ? result.getAsLong() : -1;
   }
 
   static long countDivisors(final long number) {
@@ -60,11 +71,6 @@ public class HighlyDivisibleTriangularNumber {
 
     private long ordinal = 0;
     private long number = 0;
-
-    public TriangularNumbersSupplier(final long startAt) {
-      ordinal = startAt;
-      number = startAt * (1 + startAt) / 2;
-    }
 
     @Override
     public long getAsLong() {
