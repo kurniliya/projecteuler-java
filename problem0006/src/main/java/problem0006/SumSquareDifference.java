@@ -7,11 +7,11 @@ import java.util.stream.IntStream;
  * <p>
  * Problem 6
  * <p>
- * The sum of the squares of the first ten natural numbers is, 1^2 + 2^2 + ... +
- * 10^2 = 385
+ * The sum of the squares of the first ten natural numbers is, 1² + 2² + ... +
+ * 10² = 385
  * <p>
  * The square of the sum of the first ten natural numbers is, (1 + 2 + ... +
- * 10)^2 = 552 = 3025
+ * 10)² = 552 = 3025
  * <p>
  * Hence the difference between the sum of the squares of the first ten natural
  * numbers and the square of the sum is 3025 − 385 = 2640.
