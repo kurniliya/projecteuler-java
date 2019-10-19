@@ -2,6 +2,7 @@ package problem0027;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.stream.LongStream;
 import utils.NumUtils;
 
 /**
@@ -53,13 +54,10 @@ class QuadraticPrimes {
   }
 
   static long countConsecutivePrimes(final long linear, final long constant) {
-    long result = 0;
-    long n = 0;
-    while (NumUtils.isPrime(quadratic(linear, constant, n++))) {
-      result++;
-    }
-
-    return result;
+    return LongStream.iterate(0,
+        i -> NumUtils.isPrime(quadratic(linear, constant, i)),
+        i -> i + 1)
+        .count();
   }
 
   private static long quadratic(final long linear, final long constant,
