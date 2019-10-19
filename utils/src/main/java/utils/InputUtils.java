@@ -3,32 +3,40 @@ package utils;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.collect.Lists;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputUtils {
 
-  public static ArrayList<ArrayList<Long>> readMatrixFromFile(
-      final File file) throws IOException {
+  public static long[][] readSquareMatrixFromFile(
+      final File file, final int size)
+      throws IOException {
+    return readMatrixFromFile(file, size, size);
+  }
+
+  public static long[][] readMatrixFromFile(
+      final File file, final int rowsCount, final int columnsCount)
+      throws IOException {
     checkNotNull(file);
     checkArgument(file.isFile());
+    checkArgument(rowsCount > 0);
+    checkArgument(columnsCount > 0);
 
-    ArrayList<ArrayList<Long>> result = Lists.newArrayList();
+    long[][] result = new long[rowsCount][columnsCount];
 
     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
       String line;
-      while ((line = br.readLine()) != null) {
+      int row = 0;
+      while ((line = br.readLine()) != null && row < rowsCount) {
+        int column = 0;
         final Scanner scanner = new Scanner(line);
-        final ArrayList<Long> row = new ArrayList<>();
-        while (scanner.hasNext()) {
-          row.add(scanner.nextLong());
+        while (scanner.hasNext() && column < columnsCount) {
+          result[row][column++] = scanner.nextLong();
         }
-        result.add(row);
+        ++row;
       }
     }
 

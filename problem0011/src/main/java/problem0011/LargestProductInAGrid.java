@@ -3,8 +3,6 @@ package problem0011;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.ArrayList;
-
 /**
  * Largest product in a grid
  * <p>
@@ -22,32 +20,30 @@ import java.util.ArrayList;
  */
 public class LargestProductInAGrid {
 
-  static long compute(final ArrayList<ArrayList<Long>> matrix,
+  static long compute(final long[][] matrix,
+      final int matrixSize,
       final int subsetSize) {
     checkNotNull(matrix);
+    checkArgument(matrixSize > 0);
     checkArgument(subsetSize > 0);
-
-    final int rowsCount = matrix.size();
-    final int colsCount = matrix.get(1).size();
-    checkArgument(subsetSize <= rowsCount);
-    checkArgument(subsetSize <= colsCount);
+    checkArgument(subsetSize <= matrixSize);
 
     long result = Long.MIN_VALUE;
 
     result = Math.max(result,
-        maxDiagonalNorthEast(matrix, rowsCount, colsCount, subsetSize));
+        maxDiagonalNorthEast(matrix, matrixSize, matrixSize, subsetSize));
     result = Math.max(result,
-        maxDiagonalSouthEast(matrix, rowsCount, colsCount, subsetSize));
-    result = Math
-        .max(result, maxHorizontal(matrix, rowsCount, colsCount, subsetSize));
-    result = Math
-        .max(result, maxVertical(matrix, rowsCount, colsCount, subsetSize));
+        maxDiagonalSouthEast(matrix, matrixSize, matrixSize, subsetSize));
+    result = Math.max(result,
+        maxHorizontal(matrix, matrixSize, matrixSize, subsetSize));
+    result = Math.max(result,
+        maxVertical(matrix, matrixSize, matrixSize, subsetSize));
 
     return result;
   }
 
   private static long maxDiagonalNorthEast(
-      final ArrayList<ArrayList<Long>> matrix,
+      final long[][] matrix,
       final int numRows,
       final int numCols,
       final int subsetSize) {
@@ -57,7 +53,7 @@ public class LargestProductInAGrid {
       for (int startCol = 0; startCol < numCols - subsetSize + 1; ++startCol) {
         long product = 1;
         for (int i = 0; i < subsetSize; i++) {
-          product *= matrix.get(startRow - i).get(startCol + i);
+          product *= matrix[startRow - i][startCol + i];
         }
         result = Math.max(result, product);
       }
@@ -67,7 +63,7 @@ public class LargestProductInAGrid {
   }
 
   private static long maxDiagonalSouthEast(
-      final ArrayList<ArrayList<Long>> matrix,
+      final long[][] matrix,
       final int numRows,
       final int numCols,
       final int subsetSize) {
@@ -77,7 +73,7 @@ public class LargestProductInAGrid {
       for (int startCol = 0; startCol < numCols - subsetSize + 1; ++startCol) {
         long product = 1;
         for (int i = 0; i < subsetSize; i++) {
-          product *= matrix.get(startRow + i).get(startCol + i);
+          product *= matrix[startRow + i][startCol + i];
         }
         result = Math.max(result, product);
       }
@@ -86,7 +82,7 @@ public class LargestProductInAGrid {
     return result;
   }
 
-  private static long maxHorizontal(final ArrayList<ArrayList<Long>> matrix,
+  private static long maxHorizontal(final long[][] matrix,
       final int numRows,
       final int numCols,
       final int subsetSize) {
@@ -96,7 +92,7 @@ public class LargestProductInAGrid {
       for (int startCol = 0; startCol < numCols - subsetSize + 1; ++startCol) {
         long product = 1;
         for (int i = 0; i < subsetSize; i++) {
-          product *= matrix.get(startRow).get(startCol + i);
+          product *= matrix[startRow][startCol + i];
         }
         result = Math.max(result, product);
       }
@@ -105,7 +101,7 @@ public class LargestProductInAGrid {
     return result;
   }
 
-  private static long maxVertical(final ArrayList<ArrayList<Long>> matrix,
+  private static long maxVertical(final long[][] matrix,
       final int numRows,
       final int numCols,
       final int subsetSize) {
@@ -115,7 +111,7 @@ public class LargestProductInAGrid {
       for (int startRow = 0; startRow < numRows - subsetSize + 1; ++startRow) {
         long product = 1;
         for (int i = 0; i < subsetSize; i++) {
-          product *= matrix.get(startRow + i).get(startCol);
+          product *= matrix[startRow + i][startCol];
         }
         result = Math.max(result, product);
       }
@@ -123,5 +119,4 @@ public class LargestProductInAGrid {
 
     return result;
   }
-
 }
