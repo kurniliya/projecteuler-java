@@ -8,8 +8,6 @@ import java.util.Objects;
 
 public class Factorization {
 
-  private static final long[] INCREMENTS = {4, 2, 4, 2, 4, 6, 2, 6};
-
   private final ImmutableList<PrimeFactor> factors;
 
   private Factorization(final List<PrimeFactor> factors) {
@@ -21,26 +19,7 @@ public class Factorization {
 
     ImmutableList.Builder<PrimeFactor> factors = ImmutableList.builder();
     long number = n;
-
-    for (long divisor : new int[]{2, 3, 5}) {
-      if (number % divisor != 0) {
-        continue;
-      }
-
-      long power = 0;
-      while (number % divisor == 0) {
-        ++power;
-        number /= divisor;
-      }
-      factors.add(PrimeFactor.of(divisor, power));
-    }
-
-    int increment_index = 0;
-    for (long divisor = 2; divisor * divisor <= number;
-        divisor += INCREMENTS[increment_index++]) {
-      if (increment_index == 8) {
-        increment_index = 0;
-      }
+    for (long divisor = 2; divisor * divisor <= number; ++divisor) {
       if (number % divisor != 0) {
         continue;
       }
