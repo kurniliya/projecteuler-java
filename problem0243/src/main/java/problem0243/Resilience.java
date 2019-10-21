@@ -33,7 +33,7 @@ public class Resilience {
     checkArgument(ratioDenominator > 1);
     long time = System.nanoTime();
 
-    for (long candidate = 2; candidate < Long.MAX_VALUE; ++candidate) {
+    for (long candidate = 2; candidate < Long.MAX_VALUE - 2; candidate += 2) {
       final long resilientFractionsCount = countResilientFractions(candidate);
       final long properFractionsCount = candidate - 1;
 
