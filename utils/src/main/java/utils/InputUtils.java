@@ -7,9 +7,21 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 public class InputUtils {
+
+  public static BigInteger[] readBigIntegerListFromFile(final File file)
+      throws IOException {
+    checkNotNull(file);
+    checkArgument(file.isFile());
+
+    return Files.lines(file.toPath())
+        .map(BigInteger::new)
+        .toArray(BigInteger[]::new);
+  }
 
   public static long[][] readSquareMatrixFromFile(
       final File file, final int size)
@@ -36,7 +48,7 @@ public class InputUtils {
         while (scanner.hasNext() && column < columnsCount) {
           result[row][column++] = scanner.nextLong();
         }
-        ++row;
+        row++;
       }
     }
 
