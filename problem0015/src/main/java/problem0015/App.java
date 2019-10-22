@@ -6,17 +6,27 @@ public class App {
     System.out.println(f(20));
   }
 
-  static long f(final long size) {
+  static long f(final int size) {
     return f(size, size);
   }
 
-  static long f(final long m, final long n) {
-    if (n == 0 && m == 0) {
-      return 0;
-    } else if (m == 0 || n == 0) {
-      return 1;
+  static long f(final int width, final int height) {
+    final long[][] values = new long[width + 1][height + 1];
+
+    values[0][0] = 0;
+    for (int x = 1; x < width + 1; ++x) {
+      values[x][0] = 1;
+    }
+    for (int y = 1; y < height + 1; ++y) {
+      values[0][y] = 1;
     }
 
-    return f(m, n - 1) + f(m - 1, n);
+    for (int x = 1; x < width + 1; ++x) {
+      for (int y = 1; y < height + 1; ++y) {
+        values[x][y] = values[x][y - 1] + values[x - 1][y];
+      }
+    }
+
+    return values[width][height];
   }
 }
