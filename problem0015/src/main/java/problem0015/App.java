@@ -3,7 +3,11 @@ package problem0015;
 public class App {
 
   public static void main(String[] args) {
-    System.out.println(f(20, 20));
+    System.out.println(f(20));
+  }
+
+  static long f(final long size) {
+    return f(size, size);
   }
 
   static long f(final long m, final long n) {

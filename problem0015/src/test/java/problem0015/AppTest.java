@@ -21,6 +21,6 @@ public class AppTest {
     }
 
     @Test public void test_2x2() {
-        assertEquals(6, App.f(2, 2));
+        assertEquals(6, App.f(2));
     }
 }
