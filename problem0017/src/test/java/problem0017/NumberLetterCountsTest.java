@@ -53,4 +53,9 @@ public class NumberLetterCountsTest {
     assertThat(NumberLetterCounts.asNumeral(1_000).toString(),
         is("one thousand"));
   }
+
+  @Test
+  public void compute_1() {
+    assertThat(NumberLetterCounts.compute(1), is(3));
+  }
 }

@@ -55,6 +55,22 @@ public class NumberLetterCounts {
       .put(9, "ninety")
       .build();
 
+  static int compute(final int lastNumber) {
+    checkArgument(lastNumber >= 1);
+
+    final StringBuilder sequence = new StringBuilder();
+    for (int i = 1; i <= lastNumber; ++i) {
+      sequence.append(NumberLetterCounts.asNumeral(i));
+    }
+    for (int i = 0; i < sequence.length(); ++i) {
+      if (sequence.charAt(i) == ' ' || sequence.charAt(i) == '-') {
+        sequence.deleteCharAt(i);
+      }
+    }
+
+    return sequence.length();
+  }
+
   static StringBuilder asNumeral(final int number) {
     int remainder = number;
     final StringBuilder result = new StringBuilder();
