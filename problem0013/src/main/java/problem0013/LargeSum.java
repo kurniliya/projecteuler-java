@@ -18,7 +18,7 @@ class LargeSum {
     final BigInteger[] input = InputUtils.readBigIntegerListFromFile(file);
 
     final BigInteger sum = Arrays.stream(input)
-        .reduce(BigInteger.ONE, BigInteger::add);
+        .reduce(BigInteger.ZERO, BigInteger::add);
     BigInteger tenToTenthPower = BigInteger.valueOf(10_000_000_000L);
     BigInteger firstTenDigits = sum;
     while (firstTenDigits.compareTo(tenToTenthPower) > 0) {
