@@ -1,5 +1,6 @@
 package utils;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class NumUtils {
@@ -18,6 +19,26 @@ public class NumUtils {
       final int rightmostDigit = number % 10;
       result.add(rightmostDigit);
       number /= 10;
+    }
+
+    assert result.size() > 0;
+    return result;
+  }
+
+  /**
+   * @param n Number to split into digits.
+   * @return List of digits, least significant first.
+   */
+  public static ArrayList<Integer> digits(final BigInteger n) {
+    assert n.compareTo(BigInteger.ZERO) > 0;
+
+    final ArrayList<Integer> result = new ArrayList<>();
+
+    BigInteger number = n;
+    while (number.compareTo(BigInteger.ZERO) > 0) {
+      BigInteger[] pair = number.divideAndRemainder(BigInteger.TEN);
+      result.add(pair[1].intValueExact());
+      number = pair[0];
     }
 
     assert result.size() > 0;

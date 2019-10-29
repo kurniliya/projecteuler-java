@@ -1,7 +1,10 @@
 package utils;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +16,15 @@ import org.junit.runners.Parameterized;
 
 @RunWith(Enclosed.class)
 public class NumUtilsTest {
+
+  public static class BigIntegerDigitsTest {
+
+    @Test
+    public void testDigits() {
+      assertThat(NumUtils.digits(BigInteger.valueOf(23)),
+          is(Arrays.asList(3, 2)));
+    }
+  }
 
   @RunWith(Parameterized.class)
   public static class DigitsTest {
