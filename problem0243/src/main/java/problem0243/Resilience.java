@@ -2,6 +2,7 @@ package problem0243;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -73,10 +74,14 @@ public class Resilience {
    * We then correct for this over-counting directly, by additionally computing
    * number of numerators that have been counted more than once, i.e. those
    * divisible by some combination of several prime factors.
+   * <p>
+   * See also for description of essentially the same idea:
+   * https://cs.stackexchange.com/q/97501/60327
    *
    * @param n Denominator to count number of resilient fractions for.
    * @return Number of resilient fractions.
    */
+  @VisibleForTesting
   static long countResilientFractions(final long n) {
     checkArgument(n >= 2);
 
@@ -94,7 +99,8 @@ public class Resilience {
       }
       long divisor = factorCombination.stream()
           .reduce(1L, (left, right) -> left * right);
-      final long sign = factorCombination.size() == 1 ? +1 : -1;
+
+      final long sign = (factorCombination.size() % 2) == 1 ? +1 : -1;
       nonResilientCount += sign * (n - 1) / divisor;
     }
 

@@ -8,22 +8,32 @@ import org.junit.Test;
 public class ResilienceTest {
 
   @Test
-  public void countResilientFractions_12() {
+  public void countResilientFractions_complex_number_with_two_prime_factors() {
     assertThat(Resilience.countResilientFractions(12), is(4L));
   }
 
   @Test
-  public void countResilientFractions_11() {
-    assertThat(Resilience.countResilientFractions(11), is(10L));
-  }
-
-  @Test
-  public void countResilientFractions_30() {
+  public void countResilientFractions_complex_number_with_three_prime_factors() {
     assertThat(Resilience.countResilientFractions(30), is(8L));
   }
 
   @Test
-  public void countResilientFractions_997() {
+  public void countResilientFractions_complex_number_with_four_prime_factors() {
+    assertThat(Resilience.countResilientFractions(210), is(48L));
+  }
+
+  @Test
+  public void countResilientFractions_prime() {
+    assertThat(Resilience.countResilientFractions(11), is(10L));
+  }
+
+  @Test
+  public void countResilientFractions_prime_squared() {
+    assertThat(Resilience.countResilientFractions(9), is(6L));
+  }
+
+  @Test
+  public void countResilientFractions_large_prime() {
     assertThat(Resilience.countResilientFractions(997), is(996L));
   }
 
