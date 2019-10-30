@@ -1,7 +1,12 @@
 package utils;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+import com.google.common.collect.Sets;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NumUtils {
 
@@ -10,7 +15,7 @@ public class NumUtils {
    * @return List of digits, least significant first.
    */
   public static ArrayList<Integer> digits(final int n) {
-    assert n > 0;
+    checkArgument(n > 0);
 
     final ArrayList<Integer> result = new ArrayList<>();
 
@@ -30,7 +35,7 @@ public class NumUtils {
    * @return List of digits, least significant first.
    */
   public static ArrayList<Integer> digits(final BigInteger n) {
-    assert n.compareTo(BigInteger.ZERO) > 0;
+    checkArgument(n.compareTo(BigInteger.ZERO) > 0);
 
     final ArrayList<Integer> result = new ArrayList<>();
 
@@ -39,6 +44,36 @@ public class NumUtils {
       BigInteger[] pair = number.divideAndRemainder(BigInteger.TEN);
       result.add(pair[1].intValueExact());
       number = pair[0];
+    }
+
+    assert result.size() > 0;
+    return result;
+  }
+
+  /**
+   * @param n Number to analyze.
+   * @return List of proper factors.
+   */
+  public static HashSet<Long> factors(final int n) {
+    checkArgument(n > 0);
+
+    final Factorization factorization = Factorization.of(n);
+    final Set<Long> complexFactors = new HashSet<>();
+
+    for (PrimeFactor factor : factorization.factors()) {
+      long complexFactor = 1;
+      for (int i = 0; i < factor.power(); ++i) {
+        complexFactor *= factor.factor();
+        complexFactors.add(complexFactor);
+      }
+    }
+
+    Set<Set<Long>> factorPowerSet = Sets.powerSet(complexFactors);
+    final HashSet<Long> result = new HashSet<>();
+
+    for (Set<Long> factorSet : factorPowerSet) {
+      final long factor = factorSet.stream().reduce(1L, (x, y) -> x * y);
+      result.add(factor);
     }
 
     assert result.size() > 0;

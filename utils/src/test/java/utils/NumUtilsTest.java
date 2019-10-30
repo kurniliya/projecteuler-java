@@ -1,108 +1,83 @@
 package utils;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-@RunWith(Enclosed.class)
 public class NumUtilsTest {
 
-  public static class BigIntegerDigitsTest {
-
-    @Test
-    public void testDigits() {
-      assertThat(NumUtils.digits(BigInteger.valueOf(23)),
-          is(Arrays.asList(3, 2)));
-    }
+  @Test
+  public void testFactors() {
+    HashSet<Long> result = NumUtils.factors(30);
+    assertThat(result,
+        hasItems(1L, 2L, 3L, 5L, 6L, 10L, 15L, 30L));
+    assertThat(result.size(), is(8));
   }
 
-  @RunWith(Parameterized.class)
-  public static class DigitsTest {
-
-    private int arg1;
-    private List<Integer> expected;
-
-    public DigitsTest(final int arg1, final List<Integer> expected) {
-      this.arg1 = arg1;
-      this.expected = expected;
-    }
-
-    @Parameterized.Parameters(name = "{index}: f({0})={1}")
-    public static Collection<Object[]> data() {
-      return Arrays.asList(new Object[][]{
-          {1, Collections.singletonList(1)},
-          {20, Arrays.asList(0, 2)},
-      });
-    }
-
-    @Test
-    public void test() {
-      assertEquals(expected, NumUtils.digits(arg1));
-    }
+  @Test
+  public void testDigits1() {
+    assertThat(NumUtils.digits(1), is(Collections.singletonList(1)));
   }
 
-  @RunWith(Parameterized.class)
-  public static class IsPalindromeTest {
-
-    private int arg1;
-    private boolean expected;
-
-    public IsPalindromeTest(final int arg1, final boolean expected) {
-      this.arg1 = arg1;
-      this.expected = expected;
-    }
-
-    @Parameterized.Parameters(name = "{index}: f({0})={1}")
-    public static Collection<Object[]> data() {
-      return Arrays.asList(new Object[][]{
-          {1, true},
-          {23, false},
-          {323, true},
-          {9009, true},
-      });
-    }
-
-    @Test
-    public void test() {
-      assertEquals(expected, NumUtils.isPalindrome(arg1));
-    }
+  @Test
+  public void testDigits20() {
+    assertThat(NumUtils.digits(20), is(Arrays.asList(0, 2)));
   }
 
-  @RunWith(Parameterized.class)
-  public static class IsPrimeTest {
+  @Test
+  public void testDigitsBigInteger23() {
+    assertThat(NumUtils.digits(BigInteger.valueOf(23)),
+        is(Arrays.asList(3, 2)));
+  }
 
-    private int arg1;
-    private boolean expected;
+  @Test
+  public void testIsPalindromeSmallestInput() {
+    assertThat(NumUtils.isPalindrome(1), is(true));
+  }
 
-    public IsPrimeTest(final int arg1, final boolean expected) {
-      this.arg1 = arg1;
-      this.expected = expected;
-    }
+  @Test
+  public void testIsPalindromeTwoDigits() {
+    assertThat(NumUtils.isPalindrome(23), is(false));
+  }
 
-    @Parameterized.Parameters(name = "{index}: f({0})={1}")
-    public static Collection<Object[]> data() {
-      return Arrays.asList(new Object[][]{
-          {1, false},
-          {2, true},
-          {3, true},
-          {4, false},
-          {5, true},
-      });
-    }
+  @Test
+  public void testIsPalindromeThreeDigits() {
+    assertThat(NumUtils.isPalindrome(323), is(true));
+  }
 
-    @Test
-    public void test() {
-      assertEquals(expected, NumUtils.isPrime(arg1));
-    }
+  @Test
+  public void testIsPalindromeFourDigits() {
+    assertThat(NumUtils.isPalindrome(9009), is(true));
+  }
+
+  @Test
+  public void testIsPrime1() {
+    assertThat(NumUtils.isPrime(1), is(false));
+  }
+
+  @Test
+  public void testIsPrime2() {
+    assertThat(NumUtils.isPrime(2), is(true));
+  }
+
+  @Test
+  public void testIsPrime3() {
+    assertThat(NumUtils.isPrime(3), is(true));
+  }
+
+  @Test
+  public void testIsPrime4() {
+    assertThat(NumUtils.isPrime(4), is(false));
+  }
+
+  @Test
+  public void testIsPrime5() {
+    assertThat(NumUtils.isPrime(5), is(true));
   }
 }
