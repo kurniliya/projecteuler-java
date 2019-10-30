@@ -2,11 +2,9 @@ package utils;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Sets;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class NumUtils {
 
@@ -52,32 +50,22 @@ public class NumUtils {
 
   /**
    * @param n Number to analyze.
-   * @return List of proper factors.
+   * @return List of factors, including 1 and n itself.
    */
-  public static HashSet<Long> factors(final int n) {
+  public static ArrayList<Long> factors(final long n) {
     checkArgument(n > 0);
 
-    final Factorization factorization = Factorization.of(n);
-    final Set<Long> complexFactors = new HashSet<>();
+    final List<PrimeFactor> primes = Factorization.of(n).factors();
 
-    for (PrimeFactor factor : factorization.factors()) {
-      long complexFactor = 1;
-      for (int i = 0; i < factor.power(); ++i) {
-        complexFactor *= factor.factor();
-        complexFactors.add(complexFactor);
-      }
-    }
+    final long alphabetSize = primes.stream()
+        .mapToLong(f -> f.power() + 1)
+        .sum();
+    final ArrayList<Long> factors = new ArrayList<>(
+        (int) Math.pow(2, alphabetSize));
+    computeFactors(primes, 1, factors);
 
-    Set<Set<Long>> factorPowerSet = Sets.powerSet(complexFactors);
-    final HashSet<Long> result = new HashSet<>();
-
-    for (Set<Long> factorSet : factorPowerSet) {
-      final long factor = factorSet.stream().reduce(1L, (x, y) -> x * y);
-      result.add(factor);
-    }
-
-    assert result.size() > 0;
-    return result;
+    assert factors.size() > 0;
+    return factors;
   }
 
   public static boolean isPalindrome(final int number) {
@@ -96,6 +84,25 @@ public class NumUtils {
     }
 
     return true;
+  }
+
+  private static void computeFactors(final List<PrimeFactor> primeFactors,
+      final long factor, final List<Long> factors) {
+    final PrimeFactor prime = primeFactors.get(0);
+    final int primeFactorsSize = primeFactors.size();
+
+    long complexFactor = 1;
+    for (int i = 0; i <= prime.power(); ++i) {
+      final long newFactor = factor * complexFactor;
+
+      if (primeFactorsSize == 1) {
+        factors.add(newFactor);
+      } else {
+        computeFactors(primeFactors.subList(1, primeFactorsSize),
+            newFactor, factors);
+      }
+      complexFactor *= prime.factor();
+    }
   }
 
   private static boolean isPalindrome(final ArrayList<Integer> digits) {

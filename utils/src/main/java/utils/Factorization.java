@@ -15,7 +15,7 @@ public class Factorization {
   }
 
   public static Factorization of(final long n) {
-    checkArgument(n >= 2);
+    checkArgument(n >= 2, "n", n);
 
     ImmutableList.Builder<PrimeFactor> factors = ImmutableList.builder();
     long number = n;

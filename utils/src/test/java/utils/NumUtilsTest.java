@@ -5,19 +5,40 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import org.junit.Test;
 
 public class NumUtilsTest {
 
   @Test
-  public void testFactors() {
-    HashSet<Long> result = NumUtils.factors(30);
-    assertThat(result,
-        hasItems(1L, 2L, 3L, 5L, 6L, 10L, 15L, 30L));
+  public void testFactorsPrimeNumber() {
+    ArrayList<Long> result = NumUtils.factors(5);
+    assertThat(result, hasItems(1L, 5L));
+    assertThat(result.size(), is(2));
+  }
+
+  @Test
+  public void testFactorsSquareNumber() {
+    ArrayList<Long> result = NumUtils.factors(9);
+    assertThat(result, hasItems(1L, 3L, 9L));
+    assertThat(result.size(), is(3));
+  }
+
+  @Test
+  public void testFactorsMultiplePrimes() {
+    ArrayList<Long> result = NumUtils.factors(30);
+    assertThat(result, hasItems(1L, 2L, 3L, 5L, 6L, 10L, 15L, 30L));
     assertThat(result.size(), is(8));
+  }
+
+  @Test
+  public void testFactorsRepeatedPrimes() {
+    ArrayList<Long> result = NumUtils.factors(220);
+    assertThat(result,
+        hasItems(1L, 2L, 4L, 5L, 10L, 11L, 20L, 22L, 44L, 55L, 110L, 220L));
+    assertThat(result.size(), is(12));
   }
 
   @Test
