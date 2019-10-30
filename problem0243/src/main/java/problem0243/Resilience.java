@@ -75,7 +75,7 @@ public class Resilience {
    * divisible by some combination of several prime factors.
    *
    * @param n Denominator to count number of resilient fractions for.
-   * @return Number of resilient factions.
+   * @return Number of resilient fractions.
    */
   static long countResilientFractions(final long n) {
     checkArgument(n >= 2);
