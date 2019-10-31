@@ -5,7 +5,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import utils.Factorization;
 import utils.PrimeFactor;
@@ -32,9 +31,15 @@ public class Resilience {
       final long ratioDenominator) {
     checkArgument(ratioNumerator > 0);
     checkArgument(ratioDenominator > 1);
-    long time = System.nanoTime();
 
-    for (long candidate = 2; candidate < Long.MAX_VALUE; ++candidate) {
+    final long START_VALUE = 2;
+    double minResilience = Double.MAX_VALUE;
+    long minResilienceNumber = START_VALUE;
+    long step = 1;
+
+    for (long candidate = START_VALUE;
+        candidate < Long.MAX_VALUE;
+        candidate += step) {
       final long resilientFractionsCount = countResilientFractions(candidate);
       final long properFractionsCount = candidate - 1;
 
@@ -42,15 +47,16 @@ public class Resilience {
           < properFractionsCount * ratioNumerator) {
         return candidate;
       }
-      final long step = 1_000_000;
-      if (candidate % step == 0) {
-        final long elapsed = System.nanoTime() - time;
-        System.out.println(
-            String
-                .format("%d sec: %d * %d",
-                    TimeUnit.NANOSECONDS.toSeconds(elapsed),
-                    candidate / step, step));
-        time = System.nanoTime();
+
+      final double resilience =
+          resilientFractionsCount / (double) properFractionsCount;
+      if (resilience < minResilience) {
+        minResilience = resilience;
+        final long stepBetweenMinimums = candidate - minResilienceNumber;
+        minResilienceNumber = candidate;
+        if (stepBetweenMinimums > step) {
+          step = stepBetweenMinimums;
+        }
       }
     }
 
