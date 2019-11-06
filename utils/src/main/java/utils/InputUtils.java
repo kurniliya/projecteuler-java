@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputUtils {
@@ -46,6 +47,12 @@ public class InputUtils {
         int column = 0;
         final Scanner scanner = new Scanner(line);
         while (scanner.hasNext() && column < columnsCount) {
+          if (!scanner.hasNextLong()) {
+            throw new InputMismatchException(
+                String.format(
+                    "No long in file [%s] at row=%d, column=%d\nLine: [%s]",
+                    file.getCanonicalPath(), row, column, line));
+          }
           result[row][column++] = scanner.nextLong();
         }
         row++;
