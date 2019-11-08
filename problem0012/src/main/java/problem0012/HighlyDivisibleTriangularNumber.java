@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.OptionalLong;
 import java.util.function.LongSupplier;
 import java.util.stream.LongStream;
-import utils.Factorization;
+import utils.PrimeFactorization;
 import utils.PrimeFactor;
 
 /**
@@ -61,7 +61,7 @@ public class HighlyDivisibleTriangularNumber {
   }
 
   static long countDivisors(final long number) {
-    List<PrimeFactor> f = Factorization.of(number).factors();
+    List<PrimeFactor> f = PrimeFactorization.of(number).factors();
     return f.stream()
         .mapToLong(p -> p.power() + 1)
         .reduce(1, (left, right) -> left * right);

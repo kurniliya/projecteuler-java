@@ -6,7 +6,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import java.util.Set;
 import java.util.stream.Collectors;
-import utils.Factorization;
+import utils.PrimeFactorization;
 import utils.PrimeFactor;
 
 /**
@@ -91,7 +91,7 @@ public class Resilience {
   static long countResilientFractions(final long n) {
     checkArgument(n >= 2);
 
-    final Set<Long> factors = Factorization.of(n).factors().stream()
+    final Set<Long> factors = PrimeFactorization.of(n).factors().stream()
         .mapToLong(PrimeFactor::factor)
         .boxed()
         .collect(Collectors.toSet());

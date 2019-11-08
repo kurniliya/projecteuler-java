@@ -55,7 +55,7 @@ public class NumUtils {
   public static ArrayList<Long> factors(final long n) {
     checkArgument(n > 0);
 
-    final List<PrimeFactor> primes = Factorization.of(n).factors();
+    final List<PrimeFactor> primes = PrimeFactorization.of(n).factors();
 
     final long alphabetSize = primes.stream()
         .mapToLong(f -> f.power() + 1)

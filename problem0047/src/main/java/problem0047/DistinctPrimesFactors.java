@@ -2,7 +2,7 @@ package problem0047;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import utils.Factorization;
+import utils.PrimeFactorization;
 
 /**
  * <h1>Distinct primes factors</h1>
@@ -59,6 +59,6 @@ class DistinctPrimesFactors {
 
   private static boolean matchesCriteria(final long number,
       final long distinctFactorsCount) {
-    return Factorization.of(number).factors().size() == distinctFactorsCount;
+    return PrimeFactorization.of(number).factors().size() == distinctFactorsCount;
   }
 }

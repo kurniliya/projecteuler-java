@@ -6,15 +6,15 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.Objects;
 
-public class Factorization {
+public class PrimeFactorization {
 
   private final ImmutableList<PrimeFactor> factors;
 
-  private Factorization(final List<PrimeFactor> factors) {
+  private PrimeFactorization(final List<PrimeFactor> factors) {
     this.factors = ImmutableList.copyOf(factors);
   }
 
-  public static Factorization of(final long n) {
+  public static PrimeFactorization of(final long n) {
     checkArgument(n >= 2, "n", n);
 
     ImmutableList.Builder<PrimeFactor> factors = ImmutableList.builder();
@@ -37,7 +37,7 @@ public class Factorization {
       factors.add(PrimeFactor.of(number, 1));
     }
 
-    return new Factorization(factors.build());
+    return new PrimeFactorization(factors.build());
   }
 
   public ImmutableList<PrimeFactor> factors() {
@@ -52,7 +52,7 @@ public class Factorization {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Factorization that = (Factorization) o;
+    PrimeFactorization that = (PrimeFactorization) o;
     return Objects.equals(factors, that.factors);
   }
 
