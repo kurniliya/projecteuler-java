@@ -59,12 +59,13 @@ public class NumUtils {
 
     final long alphabetSize = primes.stream()
         .mapToLong(f -> f.power() + 1)
-        .sum();
-    final ArrayList<Long> factors = new ArrayList<>(
-        (int) Math.pow(2, alphabetSize));
+        .reduce(1, (x, y) -> x * y);
+
+    assert alphabetSize <= Integer.MAX_VALUE;
+    final ArrayList<Long> factors = new ArrayList<>((int) alphabetSize);
     computeFactors(primes, 1, factors);
 
-    assert factors.size() > 0;
+    assert factors.size() == alphabetSize : n;
     return factors;
   }
 

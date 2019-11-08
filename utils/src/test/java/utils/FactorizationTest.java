@@ -41,4 +41,13 @@ public class FactorizationTest {
             PrimeFactor.of(2, 3),
             PrimeFactor.of(3, 2))));
   }
+
+  @Test
+  public void test_composite_number_with_three_factors() {
+    assertThat(Factorization.of(220).factors(),
+        is(Lists.newArrayList(
+            PrimeFactor.of(2, 2),
+            PrimeFactor.of(5, 1),
+            PrimeFactor.of(11, 1))));
+  }
 }
