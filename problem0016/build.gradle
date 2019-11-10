@@ -2,10 +2,6 @@ plugins {
     id 'application'
 }
 
-repositories {
-    jcenter()
-}
-
 application {
     mainClassName = 'problem0016.App'
 }

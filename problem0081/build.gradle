@@ -2,10 +2,6 @@ plugins {
     id 'application'
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     compile project(':utils')
 }
