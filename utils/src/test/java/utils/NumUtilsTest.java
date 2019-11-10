@@ -101,4 +101,9 @@ public class NumUtilsTest {
   public void testIsPrime5() {
     assertThat(NumUtils.isPrime(5), is(true));
   }
+
+  @Test
+  public void testIsPrime953() {
+    assertThat(NumUtils.isPrime(953), is(true));
+  }
 }
