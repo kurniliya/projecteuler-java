@@ -32,7 +32,7 @@ public class App {
         var sum = sublist.stream().mapToLong(l -> l).sum();
 
         if (sum >= exclusiveUpperBoundary) {
-          continue;
+          break;
         }
 
         if (primesSet.contains(sum)) {
