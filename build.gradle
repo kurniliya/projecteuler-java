@@ -6,6 +6,8 @@ subprojects {
     }
 
     dependencies {
+        compileOnly 'org.jetbrains:annotations:18.0.0'
+
         implementation 'com.google.guava:guava:28.0-jre'
 
         testImplementation 'junit:junit:4.12'
