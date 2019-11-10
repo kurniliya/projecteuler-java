@@ -4,8 +4,6 @@ plugins {
 
 dependencies {
     compile project(':utils')
-
-    implementation 'com.google.guava:guava:28.0-jre'
 }
 
 application {

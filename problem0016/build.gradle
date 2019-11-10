@@ -6,10 +6,6 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    implementation 'com.google.guava:guava:28.0-jre'
-}
-
 application {
     mainClassName = 'problem0016.App'
 }

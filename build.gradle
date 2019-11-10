@@ -6,6 +6,8 @@ subprojects {
     }
 
     dependencies {
+        implementation 'com.google.guava:guava:28.0-jre'
+
         testImplementation 'junit:junit:4.12'
         testImplementation "com.google.truth:truth:1.0"
     }
