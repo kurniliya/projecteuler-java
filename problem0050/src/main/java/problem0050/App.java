@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import utils.NumUtils;
@@ -20,7 +19,6 @@ public class App {
     checkArgument(exclusiveUpperBoundary >= 2);
 
     final var primes = listOfPrimesUpTo(exclusiveUpperBoundary);
-    final var primesSet = new HashSet<>(primes);
 
     final int primesSize = primes.size();
     for (int sublistSize = primesSize; sublistSize > 0; --sublistSize) {
@@ -35,7 +33,7 @@ public class App {
           break;
         }
 
-        if (primesSet.contains(sum)) {
+        if (NumUtils.isPrime(sum)) {
           System.out.println(sublist);
           return sum;
         }
